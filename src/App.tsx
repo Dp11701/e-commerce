@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Login, SignUp, Account, DetailsPages } from "./pages";
 import { useSelector } from "react-redux";
 
