@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -13,6 +13,7 @@ import { authActions } from "../../../store/authSlice";
 import styles from "./style.module.css";
 
 const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [cardOpen, setCardOpen] = useState<boolean>(false);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
@@ -27,7 +28,6 @@ const Header: React.FC = () => {
   const quantity = useSelector((state: any) => state.cart.totalQuantity);
   const cartItems = useSelector((state: any) => state.cart.itemsList);
 
-  //total
   let total = 0;
   const itemsLists = useSelector((state: any) => state.cart.itemsList);
   itemsLists.forEach((item: any) => {
@@ -58,13 +58,21 @@ const Header: React.FC = () => {
     dispatch(authActions.logout());
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <header
-        className={`${styles.header} ${
-          window.scrollY > 100 ? styles.active : ""
-        }`}
-      >
+      <header className={`${styles.header} ${isScrolled ? styles.active : ""}`}>
         <div className="scontainer flex">
           <div className="logo">
             <Link to="/">
@@ -81,7 +89,7 @@ const Header: React.FC = () => {
               <span className="flexCenter">{quantity}</span>
             </div>
             <div className={styles.profile}>
-              {true /* Update this with your user condition */ ? (
+              {true ? (
                 <>
                   <button
                     className={styles.img}
