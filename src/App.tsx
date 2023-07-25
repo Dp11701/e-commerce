@@ -1,6 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, Login, SignUp, Account, DetailsPages } from "./pages";
+import {
+  Home,
+  Login,
+  SignUp,
+  Account,
+  DetailsPages,
+  Product,
+  ProductDetail,
+} from "./pages";
 import { useSelector } from "react-redux";
 
 const App: React.FC = () => {
@@ -15,6 +23,8 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/account" element={<Account />} />
             <Route path="/details" element={<DetailsPages />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
           </>
         ) : (
           <>

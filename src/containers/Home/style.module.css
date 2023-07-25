@@ -1,0 +1,15 @@
+.showBtn {
+  margin: 0;
+  width: 100px;
+  height: 50px;
+  color: black;
+  background-color: #eec900;
+  border-radius: 10px;
+  margin-right: 40px;
+  font-weight: 400;
+}
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
