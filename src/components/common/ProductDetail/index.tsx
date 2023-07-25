@@ -6,15 +6,7 @@ import Footer from "../../Layout/Footer";
 import styles from "./style.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
-import CartItem from "../../../store/cartSlice";
 
-interface ProductCartProps {
-  id: number;
-  cover: string;
-  name: string;
-  price: number;
-  desc: string;
-}
 interface CartItem {
   id: number;
   price: number;
@@ -22,6 +14,14 @@ interface CartItem {
   totalPrice: number;
   name: string;
   cover: string;
+}
+
+interface ProductCartProps {
+  id: number;
+  cover: string;
+  name: string;
+  price: number;
+  desc: string;
 }
 
 const ProductDetail: React.FC = () => {
@@ -64,7 +64,9 @@ const ProductDetail: React.FC = () => {
           <h2>{selectedProduct.name}</h2>
           <p>{`Price: $${selectedProduct.price}`}</p>
           <h3>{selectedProduct.desc}</h3>
-          <button className={styles.add} onClick={addToCart}>Add to Cart</button>
+          <button className={styles.add} onClick={addToCart}>
+            Add to Cart
+          </button>
         </div>
       </section>
       <Footer />
