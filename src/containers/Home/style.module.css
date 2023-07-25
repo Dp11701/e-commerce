@@ -5,11 +5,11 @@
   color: black;
   background-color: #eec900;
   border-radius: 10px;
-  margin-right: 40px;
+  margin-left: 40px;
   font-weight: 400;
 }
 .product {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  justify-content: flex-end;
 }
