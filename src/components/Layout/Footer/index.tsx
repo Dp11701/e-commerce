@@ -11,8 +11,20 @@ const Footer: React.FC = () => {
           Cartsy Medicine - All right reserved - Design & Developed by RedQ, Inc
         </p>
         <div className="social">
-          <BsFacebook className="icon" />
-          <RiInstagramFill className="icon" />
+          <a
+            href="https://www.facebook.com/ngducphu170129/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsFacebook className="icon" />
+          </a>
+          <a
+            href="https://www.instagram.com/dppain11701/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <RiInstagramFill className="icon" />
+          </a>
           <AiFillTwitterCircle className="icon" />
           <AiFillLinkedin className="icon" />
         </div>

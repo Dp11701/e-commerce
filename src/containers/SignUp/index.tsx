@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 import back from "../../assets/images/my-account.jpg";
+import axios from "axios"; // Import Axios
 
 export const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -19,11 +20,36 @@ export const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Save the form data to localStorage
-    localStorage.setItem("user", JSON.stringify(formData));
-    alert("Registered successfully!");
-    navigate("/");
+
+    // Check if passwords match
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match. Please try again.");
+      return;
+    }
+
+    // Call the API for user registration
+    axios
+      .post("http://localhost:5001/api/users/register", {
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+      })
+      .then((response) => {
+        // Xử lý phản hồi thành công
+        if (response.status === 201) {
+          alert("Registered successfully!");
+          navigate("/");
+        } else {
+          alert("Registration failed. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        // Xử lý phản hồi lỗi
+        console.error("Registration failed:", error);
+        alert("An error occurred during registration. Please try again later.");
+      });
   };
+
   const handleLoginButton = () => {
     navigate("/");
   };

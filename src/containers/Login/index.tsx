@@ -1,44 +1,51 @@
+// src/components/Login.js
+
 import React, { useState } from "react";
 import styles from "./style.module.css";
 import back from "../../assets/images/my-account.jpg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import Axios
 
-export const Login: React.FC = () => {
+const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Hook to get the navigate function
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     emailOrUsername: "",
     password: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    const storedUserData = localStorage.getItem("user");
-    if (storedUserData === null) {
-      alert("User data not found. Please sign up first.");
-      return;
-    }
-
-    const parsedUserData = JSON.parse(storedUserData);
-
-    if (
-      (formData.emailOrUsername === parsedUserData.email ||
-        formData.emailOrUsername === parsedUserData.username) &&
-      formData.password === parsedUserData.password
-    ) {
-      dispatch(authActions.login());
-    } else {
-      alert("Invalid credentials. Please try again.");
-    }
+    // Gọi API đăng nhập
+    axios
+      .post("http://localhost:5001/api/users/login", {
+        email: formData.emailOrUsername,
+        password: formData.password,
+      })
+      .then((response: any) => {
+        // Xử lý phản hồi thành công
+        if (response.status === 200) {
+          // Lưu thông tin đăng nhập vào localStorage hoặc state của ứng dụng (tuỳ thuộc vào thiết kế ứng dụng của bạn)
+          localStorage.setItem("accessToken", response.data.accessToken);
+          dispatch(authActions.login());
+        } else {
+          // Xử lý trường hợp đăng nhập không thành công
+          alert("Invalid credentials. Please try again.");
+        }
+      })
+      .catch((error: any) => {
+        // Xử lý phản hồi lỗi
+        console.error("Đăng nhập thất bại:", error);
+        alert("An error occurred during login. Please try again later.");
+      });
   };
 
   const handleSignUpButton = () => {
@@ -90,3 +97,5 @@ export const Login: React.FC = () => {
     </>
   );
 };
+
+export default Login;
