@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 import back from "../../assets/images/my-account.jpg";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 
 export const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const SignUp: React.FC = () => {
 
     // Call the API for user registration
     axios
-      .post("http://localhost:5001/api/users/register", {
+      .post("https://e-commerce-backend-iub1.onrender.com/api/users/register", {
         email: formData.email,
         username: formData.username,
         password: formData.password,

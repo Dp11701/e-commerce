@@ -1,12 +1,10 @@
-// src/components/Login.js
-
 import React, { useState } from "react";
 import styles from "./style.module.css";
 import back from "../../assets/images/my-account.jpg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,27 +21,22 @@ const Login = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    // Gọi API đăng nhập
     axios
-      .post("http://localhost:5001/api/users/login", {
+      .post("https://e-commerce-backend-iub1.onrender.com/api/users/login", {
         email: formData.emailOrUsername,
         password: formData.password,
       })
       .then((response: any) => {
-        // Xử lý phản hồi thành công
         if (response.status === 200) {
-          // Lưu thông tin đăng nhập vào localStorage hoặc state của ứng dụng (tuỳ thuộc vào thiết kế ứng dụng của bạn)
+          // Save credentials to localStorage or app state
           localStorage.setItem("accessToken", response.data.accessToken);
           dispatch(authActions.login());
         } else {
-          // Xử lý trường hợp đăng nhập không thành công
           alert("Invalid credentials. Please try again.");
         }
       })
       .catch((error: any) => {
-        // Xử lý phản hồi lỗi
-        console.error("Đăng nhập thất bại:", error);
+        console.error("Login failed:", error);
         alert("An error occurred during login. Please try again later.");
       });
   };

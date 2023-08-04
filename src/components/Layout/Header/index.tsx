@@ -55,6 +55,7 @@ const Header: React.FC = () => {
   };
 
   const logoutHandler = () => {
+    localStorage.removeItem("accessToken");
     dispatch(authActions.logout());
   };
 
