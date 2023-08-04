@@ -58,7 +58,7 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <span>Email or Username</span>
+            <span>Email</span>
             <input
               type="text"
               name="emailOrUsername"
