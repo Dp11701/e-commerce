@@ -38,10 +38,10 @@ const Header: React.FC = () => {
 
   const defaultCoverImageUrl = "default_cover.jpg";
 
-  const incCartitems = (id: number, name: string, price: number) => {
+  const incCartitems = (_id: number, name: string, price: number) => {
     dispatch(
       cartActions.addToCart({
-        id,
+        _id,
         name,
         price,
         quantity: 1,

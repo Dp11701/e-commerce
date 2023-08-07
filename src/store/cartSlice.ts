@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartItem {
-  id: number;
+  _id: number;
   price: number;
   quantity: number;
   totalPrice: number;
@@ -28,7 +28,7 @@ const cartSlice = createSlice({
 
       // Check if item already exists
       const existingItem = state.itemsList.find(
-        (item) => item.id === newItem.id
+        (item) => item._id === newItem._id
       );
 
       if (existingItem) {
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
         existingItem.totalPrice += newItem.price;
       } else {
         state.itemsList.push({
-          id: newItem.id,
+          _id: newItem._id,
           price: newItem.price,
           quantity: 1,
           totalPrice: newItem.price,
@@ -47,11 +47,11 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart(state, action: PayloadAction<number>) {
-      const id = action.payload;
-      const existingItem = state.itemsList.find((item) => item.id === id);
+      const _id = action.payload;
+      const existingItem = state.itemsList.find((item) => item._id === _id);
       if (existingItem) {
         if (existingItem.quantity === 1) {
-          state.itemsList = state.itemsList.filter((item) => item.id !== id);
+          state.itemsList = state.itemsList.filter((item) => item._id !== _id);
           state.totalQuantity--;
         } else {
           existingItem.quantity--;

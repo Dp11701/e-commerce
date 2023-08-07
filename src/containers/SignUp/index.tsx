@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 import back from "../../assets/images/my-account.jpg";
@@ -12,6 +12,11 @@ export const SignUp: React.FC = () => {
     password: "",
     confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    return () => setLoading(false);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -20,6 +25,7 @@ export const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
@@ -35,17 +41,17 @@ export const SignUp: React.FC = () => {
         password: formData.password,
       })
       .then((response) => {
-        // Xử lý phản hồi thành công
         if (response.status === 201) {
           alert("Registered successfully!");
           navigate("/");
         } else {
+          setLoading(false);
           alert("Registration failed. Please try again later.");
         }
       })
       .catch((error) => {
-        // Xử lý phản hồi lỗi
         console.error("Registration failed:", error);
+        setLoading(false);
         alert("An error occurred during registration. Please try again later.");
       });
   };
@@ -99,8 +105,18 @@ export const SignUp: React.FC = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="button">
-              Register
+            <button type="submit" className={styles.signUpButton}>
+              {loading ? (
+                <div className={styles.typewriter}>
+                  <div className={styles.slide}>
+                    <i></i>
+                  </div>
+                  <div className={styles.paper}></div>
+                  <div className={styles.keyboard}></div>
+                </div>
+              ) : (
+                "Register"
+              )}
             </button>
             <button
               type="button"

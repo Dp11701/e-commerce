@@ -20,7 +20,14 @@ export default function Home() {
       <Order />
       <Category />
       <div className={`${styles.product} container`}>
-        <button type="button" className={styles.showBtn} onClick={handleShowBtn}>Show all</button>
+        <button
+          type="button"
+          className={styles.showBtn}
+          onClick={handleShowBtn}
+          style={{ width: "100px",height:"50px" }} // CSS inline để đặt chiều rộng là 100px
+        >
+          Show all
+        </button>
         <Product />
       </div>
       <Footer />

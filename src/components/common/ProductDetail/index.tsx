@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { product } from "../../../assets/data/data";
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
 import styles from "./style.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
+import axios from "axios";
 
 interface CartItem {
-  id: number;
+  _id: number;
   price: number;
   quantity: number;
   totalPrice: number;
@@ -17,7 +17,7 @@ interface CartItem {
 }
 
 interface ProductCartProps {
-  id: number;
+  _id: number;
   cover: string;
   name: string;
   price: number;
@@ -25,18 +25,27 @@ interface ProductCartProps {
 }
 
 const ProductDetail: React.FC = () => {
-  const { id } = useParams<{ id: any }>();
+  const { _id } = useParams<{ _id: any }>();
+  const [selectedProduct, setSelectedProduct] =
+    useState<ProductCartProps | null>(null);
 
-  const productId = parseInt(id, 10);
-  const selectedProduct: ProductCartProps | undefined = product.find(
-    (item) => item.id === productId
-  );
+  useEffect(() => {
+    //call API get product id
+    axios
+      .get(`https://e-commerce-backend-iub1.onrender.com/api/products/${_id}`)
+      .then((response) => {
+        setSelectedProduct(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching product:", error);
+      });
+  }, [_id]);
 
   const dispatch = useDispatch();
   const addToCart = () => {
     if (selectedProduct) {
       const item: CartItem = {
-        id: selectedProduct.id,
+        _id: selectedProduct._id,
         name: selectedProduct.name,
         price: selectedProduct.price,
         cover: selectedProduct.cover,

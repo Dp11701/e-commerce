@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
-import { product } from "../../../assets/data/data";
 import styles from "./style.module.css";
+import axios from "axios";
 
 interface CartItem {
-  id: number;
+  _id: number;
   price: number;
   quantity: number;
   totalPrice: number;
@@ -16,14 +16,14 @@ interface CartItem {
 }
 
 interface ProductCartProps {
-  id: number;
+  _id: number;
   cover: string;
   name: string;
   price: number;
 }
 
 const ProductCart: React.FC<ProductCartProps> = ({
-  id,
+  _id,
   cover,
   name,
   price,
@@ -31,7 +31,7 @@ const ProductCart: React.FC<ProductCartProps> = ({
   const dispatch = useDispatch();
   const addToCart = () => {
     const item: CartItem = {
-      id,
+      _id,
       name,
       price,
       cover,
@@ -44,7 +44,7 @@ const ProductCart: React.FC<ProductCartProps> = ({
   return (
     <div className={`${styles.box} ${styles.boxItems}`} id="product">
       <div className="img">
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${_id}`}>
           <img src={cover} alt="cover" />
         </Link>
       </div>
@@ -60,13 +60,19 @@ const ProductCart: React.FC<ProductCartProps> = ({
 };
 
 const Product: React.FC = () => {
+  const [products, setProducts] = useState<ProductCartProps[]>([]);
+  useEffect(() => {
+    axios.get("https://e-commerce-backend-iub1.onrender.com/api/products").then((response) => {
+      setProducts(response.data);
+    });
+  }, []);
   return (
     <section className={styles.product}>
       <div className="container grid3">
-        {product.map((item) => (
+        {products.map((item) => (
           <ProductCart
-            key={item.id}
-            id={item.id}
+            key={item._id}
+            _id={item._id}
             cover={item.cover}
             name={item.name}
             price={item.price}
