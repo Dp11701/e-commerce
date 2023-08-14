@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 import styles from "./style.module.css";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";

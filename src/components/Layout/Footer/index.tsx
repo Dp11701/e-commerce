@@ -2,6 +2,7 @@ import React from "react";
 import { AiFillTwitterCircle, AiFillLinkedin } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import { RiInstagramFill } from "react-icons/ri";
+import styles from "./style.module.css";
 
 const Footer: React.FC = () => {
   return (

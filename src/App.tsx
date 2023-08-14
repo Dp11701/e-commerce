@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Home,
   Login,
-  SignUp,
   Account,
   DetailsPages,
   Product,
@@ -17,7 +16,6 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/signup" element={<SignUp />} />
         {isLoggIn ? (
           <>
             <Route path="/" element={<Home />} />

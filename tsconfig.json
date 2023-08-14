@@ -6,6 +6,11 @@
       "dom.iterable",
       "esnext"
     ],
+    "paths": {
+      "crypto": [
+        "./node_modules/crypto-js"
+      ]
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
