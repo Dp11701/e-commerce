@@ -13,7 +13,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 export default function Home() {
   const navigate = useNavigate();
 
-  const [select, setSelect] = React.useState("");
+  const [select, setSelect] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
