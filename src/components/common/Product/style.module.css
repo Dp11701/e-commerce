@@ -30,7 +30,110 @@
   margin: 10px 0;
 }
 .product button {
+  display: flex;
   font-size: 25px;
   margin-top: 15px;
   float: right;
+}
+
+.showBtn {
+  width: 100px;
+  margin-right: 40px !important;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0.6em 2em;
+  border: mediumspringgreen solid 0.15em;
+  border-radius: 0.25em;
+  color: #000000 !important;
+  font-size: 14;
+  font-weight: 600 !important;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+}
+
+.showBtn p {
+  z-index: 1;
+}
+
+.showBtn:hover {
+  color: #212121;
+}
+
+.showBtn:active {
+  border-color: teal;
+}
+
+.showBtn::after,
+.showBtn::before {
+  content: "";
+  position: absolute;
+  width: 9em;
+  aspect-ratio: 1;
+  background: mediumspringgreen;
+  opacity: 50%;
+  border-radius: 50%;
+  transition: transform 500ms, background 300ms;
+}
+
+.showBtn::before {
+  left: 0;
+  transform: translateX(-8em);
+}
+
+.showBtn::after {
+  right: 0;
+  transform: translateX(8em);
+}
+
+.showBtn:hover:before {
+  transform: translateX(-1em);
+}
+
+.showBtn:hover:after {
+  transform: translateX(1em);
+}
+
+.showBtn:active:before,
+.showBtn:active:after {
+  background: teal;
+}
+
+.productNavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  margin-right: 40%;
+}
+.sortText {
+  padding-left: 40px;
+}
+.sortBtn {
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+}
+.subBtnItem {
+  margin: 0 10px 0 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(51, 65, 85, 1) !important;
+  font-weight: 400 !important;
+}
+
+.selectItem {
+  width: 100px;
+  height: 50px;
+  padding: 0 !important;
 }

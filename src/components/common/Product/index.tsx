@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
 import styles from "./style.module.css";
+import { Button, Typography, MenuItem } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import axios from "axios";
 
 interface CartItem {
@@ -60,14 +62,52 @@ const ProductCart: React.FC<ProductCartProps> = ({
 };
 
 const Product: React.FC = () => {
+  const [select, setSelect] = useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setSelect(event.target.value);
+  };
+
   const [products, setProducts] = useState<ProductCartProps[]>([]);
+
   useEffect(() => {
-    axios.get("https://e-commerce-backend-iub1.onrender.com/api/products").then((response) => {
-      setProducts(response.data);
-    });
-  }, []);
+    axios
+      .get("https://e-commerce-backend-iub1.onrender.com/api/products")
+      .then((response) => {
+        const sortedProducts = [...response.data];
+        if (select === "10") {
+          sortedProducts.sort((a, b) => b.price - a.price); // Sort high to low
+        } else if (select === "20") {
+          sortedProducts.sort((a, b) => a.price - b.price); // Sort low to high
+        }
+        setProducts(sortedProducts);
+      });
+  }, [select]);
+
   return (
     <section className={styles.product}>
+      <div className={styles.productNavBar}>
+        <Typography className={styles.sortText}>Sorted by</Typography>
+        <div className={styles.sortBtn}>
+          <Button className={styles.subBtnItem}>Connection</Button>
+          <Button className={styles.subBtnItem}>New</Button>
+          <Button className={styles.subBtnItem}>Best seller</Button>
+          <Select
+            className={styles.selectItem}
+            labelId="demo-select-small-label"
+            id="select"
+            value={select}
+            label="Price"
+            onChange={handleChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="10">High to Low</MenuItem>
+            <MenuItem value="20">Low to High</MenuItem>
+          </Select>
+        </div>
+      </div>
       <div className="container grid3">
         {products.map((item) => (
           <ProductCart
