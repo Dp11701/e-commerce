@@ -16,7 +16,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* {isLoggIn ? ( */}
+        {isLoggIn ? (
           <>
             <Route path="/" element={<Home />} />
             <Route path="/account" element={<Account />} />
@@ -24,11 +24,11 @@ const App: React.FC = () => {
             <Route path="/product" element={<Product />} />
             <Route path="/product/:_id" element={<ProductDetail />} />
           </>
-        {/* ) : (
+        ) : (
           <>
             <Route path="/" element={<Login />} />
           </>
-        )} */}
+        )}
       </Routes>
     </BrowserRouter>
   );
