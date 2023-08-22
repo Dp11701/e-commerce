@@ -21,7 +21,7 @@ function SampleNextArrow(props: SampleArrowProps) {
   const { onClick } = props;
   return (
     <div className={styles.controlBtn} onClick={onClick}>
-      <button className="next">
+      <button className={styles.next}>
         <MdNavigateNext className="icon" />
       </button>
     </div>
@@ -32,7 +32,7 @@ function SamplePrevArrow(props: SampleArrowProps) {
   const { onClick } = props;
   return (
     <div className={styles.controlBtn} onClick={onClick}>
-      <button className="prev">
+      <button className={styles.prev}>
         <GrFormPrevious className="icon" />
       </button>
     </div>

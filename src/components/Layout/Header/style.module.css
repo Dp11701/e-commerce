@@ -6,6 +6,8 @@ header {
   z-index: 44;
 }
 .search {
+  display: flex;
+  flex-direction: row;
   border: 2px solid #212121;
   border-radius: 6px;
   font-size: 15px;

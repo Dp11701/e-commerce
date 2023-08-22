@@ -63,6 +63,7 @@ const ProductCart: React.FC<ProductCartProps> = ({
 
 const Product: React.FC = () => {
   const [select, setSelect] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
@@ -83,6 +84,10 @@ const Product: React.FC = () => {
         setProducts(sortedProducts);
       });
   }, [select]);
+  // Filter products based on the search term
+  const filteredProducts = products.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <section className={styles.product}>
@@ -106,10 +111,18 @@ const Product: React.FC = () => {
             <MenuItem value="10">High to Low</MenuItem>
             <MenuItem value="20">Low to High</MenuItem>
           </Select>
+          <div className={styles.search}>
+            <input
+              type="text"
+              placeholder="Enter the product..."
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+          </div>
         </div>
       </div>
       <div className="container grid3">
-        {products.map((item) => (
+        {filteredProducts.map((item) => (
           <ProductCart
             key={item._id}
             _id={item._id}
