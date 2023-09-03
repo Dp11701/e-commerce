@@ -7,7 +7,7 @@ const DetailsPages: React.FC = () => {
   return (
     <>
       <Header />
-      <Product/>
+      <Product />
       <Footer />
     </>
   );

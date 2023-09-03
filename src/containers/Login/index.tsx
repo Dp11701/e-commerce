@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("https://e-commerce-backend-iub1.onrender.com/api/users/login", {
+      .post("https://e-commerce-backend-production-d385.up.railway.app/api/users/login", {
         email: formDataSignIn.emailOrUsername,
         password: formDataSignIn.password,
       })
@@ -67,7 +67,7 @@ const Login = () => {
 
     // Call the API for user registration
     axios
-      .post("https://e-commerce-backend-iub1.onrender.com/api/users/register", {
+      .post("https://e-commerce-backend-production-d385.up.railway.app/api/users/register", {
         email: formData.email,
         username: formData.username,
         password: formData.password,
