@@ -32,7 +32,7 @@ const ProductDetail: React.FC = () => {
   useEffect(() => {
     //call API get product id
     axios
-      .get(`https://e-commerce-backend-production-d385.up.railway.app/api/products/${_id}`)
+      .get(`https://e-commerce-backend-iub1.onrender.com/api/products/${_id}`)
       .then((response) => {
         setSelectedProduct(response.data);
       })

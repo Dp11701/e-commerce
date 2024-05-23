@@ -73,7 +73,7 @@ const Product: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("https://e-commerce-backend-production-d385.up.railway.app/api/products")
+      .get("https://e-commerce-backend-iub1.onrender.com/api/products")
       .then((response) => {
         const sortedProducts = [...response.data];
         if (select === "10") {
