@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
 import styles from "./style.module.css";
-import { SelectChangeEvent } from "@mui/material/Select";
+// import { SelectChangeEvent } from "@mui/material/Select";
 import axios from "axios";
 
 interface CartItem {
@@ -61,12 +61,11 @@ const ProductCart: React.FC<ProductCartProps> = ({
 };
 
 const Product: React.FC = () => {
-  const [select, setSelect] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [select, setSelect] = useState("");
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setSelect(event.target.value);
-  };
+  // const handleChange = (event: SelectChangeEvent) => {
+  //   setSelect(event.target.value);
+  // };
 
   const [products, setProducts] = useState<ProductCartProps[]>([]);
 
@@ -74,19 +73,19 @@ const Product: React.FC = () => {
     axios
       .get("https://e-commerce-backend-iub1.onrender.com/api/products")
       .then((response) => {
-        const sortedProducts = [...response.data];
-        if (select === "10") {
-          sortedProducts.sort((a, b) => b.price - a.price); // Sort high to low
-        } else if (select === "20") {
-          sortedProducts.sort((a, b) => a.price - b.price); // Sort low to high
-        }
-        setProducts(sortedProducts);
+        // const sortedProducts = [...response.data];
+        // if (select === "10") {
+        //   sortedProducts.sort((a, b) => b.price - a.price); // Sort high to low
+        // } else if (select === "20") {
+        //   sortedProducts.sort((a, b) => a.price - b.price); // Sort low to high
+        // }
+        setProducts(response.data);
       });
-  }, [select]);
+  }, []);
   // Filter products based on the search term
-  const filteredProducts = products.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredProducts = products.filter((item) =>
+  //   item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     <section className={styles.product}>
@@ -121,7 +120,7 @@ const Product: React.FC = () => {
         </div>
       </div> */}
       <div className="container grid3">
-        {filteredProducts.map((item) => (
+        {products.map((item) => (
           <ProductCart
             key={item._id}
             _id={item._id}
