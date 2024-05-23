@@ -91,7 +91,7 @@ const Product: React.FC = () => {
 
   return (
     <section className={styles.product}>
-      <div className={styles.productNavBar}>
+      {/* <div className={styles.productNavBar}>
         <Typography className={styles.sortText}>Sorted by</Typography>
         <div className={styles.sortBtn}>
           <Button className={styles.subBtnItem}>Connection</Button>
@@ -120,7 +120,7 @@ const Product: React.FC = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="container grid3">
         {filteredProducts.map((item) => (
           <ProductCart
