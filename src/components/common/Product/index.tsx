@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cartSlice";
 import styles from "./style.module.css";
-import { Button, Typography, MenuItem } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
 import axios from "axios";
 
 interface CartItem {
