@@ -8,11 +8,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     return () => setLoading(false);
   }, []);
 
-  //get data signin
   const [formDataSignIn, setFormDataSignIn] = useState({
     emailOrUsername: "",
     password: "",
@@ -45,7 +45,6 @@ const Login = () => {
       });
   };
 
-  //get data signup
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -59,13 +58,11 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match. Please try again.");
       return;
     }
 
-    // Call the API for user registration
     axios
       .post("https://e-commerce-backend-iub1.onrender.com/api/users/register", {
         email: formData.email,
@@ -76,7 +73,6 @@ const Login = () => {
         if (response.status === 201) {
           alert("Registered successfully!");
           setLoading(false);
-          // Save email and password to localStorage
           localStorage.setItem("userEmail", formData.email);
           localStorage.setItem("userPassword", formData.password);
         } else {
@@ -91,14 +87,6 @@ const Login = () => {
       });
   };
 
-  const handleSignUpClick = () => {
-    setIsSignUp(true);
-  };
-
-  const handleSignInClick = () => {
-    setIsSignUp(false);
-  };
-
   return (
     <div className={styles.wrapper}>
       <div
@@ -111,7 +99,7 @@ const Login = () => {
         >
           <form onSubmit={handleSubmit}>
             <h1>Create Account</h1>
-            <span>or use your email for registration</span>
+
             <input
               type="text"
               placeholder="Name"
@@ -144,7 +132,16 @@ const Login = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit">Sign Up</button>
+            <button type="submit" style={{ marginBottom: 30 }}>
+              Sign Up
+            </button>
+            <button
+              onClick={() => {
+                setIsSignUp(false);
+              }}
+            >
+              Use Account
+            </button>
             {loading ? <div className={styles.loading}>loading</div> : ""}
           </form>
         </div>
@@ -153,7 +150,7 @@ const Login = () => {
         >
           <form onSubmit={handleSubmitSignIn}>
             <h1>Sign in</h1>
-            <span>or use your account</span>
+
             <input
               type="email"
               placeholder="Email"
@@ -170,33 +167,19 @@ const Login = () => {
               onChange={handleChangeSignIn}
               required
             />
-            <button type="submit">Sign In</button>
+            <button type="submit" style={{ marginBottom: 30 }}>
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsSignUp(true);
+              }}
+            >
+              Create Account
+            </button>
             {loading ? <div className={styles.loading}>loading</div> : ""}
           </form>
-        </div>
-        <div className={styles["overlay-container"]}>
-          <div className={styles.overlay}>
-            <div
-              className={`${styles["overlay-panel"]} ${styles["overlay-left"]}`}
-            >
-              <h1>Welcome Back!</h1>
-              <p>
-                To keep connected with us please login with your personal info
-              </p>
-              <button className={styles["ghost"]} onClick={handleSignInClick}>
-                Sign In
-              </button>
-            </div>
-            <div
-              className={`${styles["overlay-panel"]} ${styles["overlay-right"]}`}
-            >
-              <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start your journey with us</p>
-              <button className={styles["ghost"]} onClick={handleSignUpClick}>
-                Sign Up
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
