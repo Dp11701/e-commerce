@@ -135,13 +135,14 @@ const Login = () => {
             <button type="submit" style={{ marginBottom: 30 }}>
               Sign Up
             </button>
-            <button
+            <span
               onClick={() => {
                 setIsSignUp(false);
               }}
+              style={{ cursor: "pointer", color: "blue" }}
             >
               Use Account
-            </button>
+            </span>
             {loading ? <div className={styles.loading}>loading</div> : ""}
           </form>
         </div>
@@ -170,14 +171,14 @@ const Login = () => {
             <button type="submit" style={{ marginBottom: 30 }}>
               Sign In
             </button>
-            <button
-              type="button"
+            <span
               onClick={() => {
                 setIsSignUp(true);
               }}
+              style={{ cursor: "pointer", color: "blue" }}
             >
               Create Account
-            </button>
+            </span>
             {loading ? <div className={styles.loading}>loading</div> : ""}
           </form>
         </div>
